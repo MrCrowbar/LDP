@@ -10,7 +10,7 @@
 # Autor: Dr. Santiago Conant, Agosto 2014 (modificado Agosto 2015)
 
 import sys
-import obten_token as scanner
+import scanner
 
 # Empata y obtiene el siguiente token
 def match(tokenEsperado):
