@@ -4,7 +4,7 @@
 
 """
 Ejercicio 3 - Equipo 10
-Paola Villarreal - A
+Paola Villarreal - A00821971
 Juan Jacobo Cruz Romero - A01067040
 """
 import sys
@@ -111,10 +111,10 @@ def scanner():
         elif edo == RRP:  
             lexema += c  # el último caracter forma el lexema
             print("Delimitador", lexema)
-        elif edo == CON:
+        elif edo == CON: # caracter de condición al lexema
             lexema += c
             print("Condicional", lexema)
-        elif edo == IDT:
+        elif edo == IDT: # ya se leyó el siguiente caracter
             leer = False
             print("Identificador",lexema)
         elif edo == ERR:   
