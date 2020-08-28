@@ -12,7 +12,7 @@
 """
 Ejercicio 4 - Equipo 5
 Paola Villarreal - A00821971
-Juan Jacobo Cruz Romero - A01067040
+Juan Jacobo Cruz Romero - A00821971_A01067040_
 
 # Así quedaron las nuevas reglas de la gramática
 # EXP  -> cte EXP1 | (EXP) EXP1
@@ -23,7 +23,7 @@ Juan Jacobo Cruz Romero - A01067040
 
 
 import sys
-import scanner
+import A00821971_A01067040_obten_token as scanner
 
 global token
 global tokens
@@ -32,10 +32,9 @@ global tokens
 def match(tokenEsperado):
     global token
     global tokens
-    print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado)
+    #print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado) # Descomentar línea para debugear
     if token == tokenEsperado:
         token = tokens.pop(0)
-        #token = scanner.obten_token()
     else:
         error("token equivocado")
     
@@ -45,7 +44,7 @@ def parser():
     global token # variable para almacenar el token 'i' de la lista tokens
     global tokens # variable para almacenar la lista de tokens del scanner
     tokens = scanner.obten_token() 
-    print("Tokens: ",tokens)
+    #print("Tokens: ",tokens) # Descomentar línea para debugear
     token = tokens.pop(0) # inicializa con el primer token
     exp2()
     if token == scanner.END:
@@ -64,7 +63,7 @@ def exp():
         match(scanner.RRP)
         exp1()
     else:
-        error("expresion mal iniciada en EXP")
+        error("expresion mal iniciada")
 
 # Módulo auxiliar para reconocimiento de expresiones con operador
 def exp1():
@@ -81,9 +80,9 @@ def exp2():
             match(token)
             exp()
         else:
-            error("expresion mal iniciada en EXP2")
+            error("expresion mal iniciada")
     else:
-        error("expresion mal iniciada en EXP2")
+        error("expresion mal iniciada")
 
 # Termina con un mensaje de error
 def error(mensaje):
