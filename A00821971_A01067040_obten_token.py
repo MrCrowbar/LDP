@@ -4,7 +4,7 @@
 
 """
 Ejercicio 3 - Equipo 10
-Paola Villarreal - A
+Paola Villarreal - A00821971
 Juan Jacobo Cruz Romero - A01067040
 """
 import sys

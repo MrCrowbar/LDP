@@ -12,7 +12,7 @@
 """
 Ejercicio 4 - Equipo 5
 Paola Villarreal - A00821971
-Juan Jacobo Cruz Romero - A00821971_A01067040_
+Juan Jacobo Cruz Romero - A01067040
 
 # Así quedaron las nuevas reglas de la gramática
 # EXP  -> cte EXP1 | (EXP) EXP1
