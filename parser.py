@@ -13,15 +13,13 @@
 Ejercicio 4 - Equipo 5
 Paola Villarreal - A00821971
 Juan Jacobo Cruz Romero - A01067040
-"""
-
-# Jala con todos los casos del documento menos con el siguiente 
-# tasa = (4 * ((tasa) <= (0.2) ? (5) : (8)) $
 
 # Así quedaron las nuevas reglas de la gramática
 # EXP  -> cte EXP1 | (EXP) EXP1
 # EXP1 -> op EXP EXP1 | vacío
 # EXP2 -> IDT op EXP
+
+"""
 
 
 import sys
