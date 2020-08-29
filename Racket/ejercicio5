@@ -1,0 +1,25 @@
+#lang racket
+; Problema 2: Función cuadrante
+(define (cuadrante x y)
+  (cond
+    [(and (= x 0) (= y 0)) 'origen]
+    [(and (> x 0) (> y 0)) 'primer_cuadrante]
+    [(and (< x 0) (> y 0)) 'segundo_cuadrante]
+    [(and (< x 0) (< y 0)) 'tercer_cuadrante]
+    [else 'cuarto_cuadrante]
+  )
+)
+
+; Problema 4: Función sumapar
+(define (par? var)
+  (= (modulo var 2) 0)
+)
+(define suma 0)
+(define (sumapar a b c d)
+  (define suma 0)
+  [if (par? a) (set! suma (+ suma a)) (set! suma (+ suma 0))]
+  [if (par? b) (set! suma (+ suma b)) (set! suma (+ suma 0))]
+  [if (par? c) (set! suma (+ suma c)) (set! suma (+ suma 0))]
+  [if (par? d) (set! suma (+ suma d)) (set! suma (+ suma 0))]
+  suma
+)
