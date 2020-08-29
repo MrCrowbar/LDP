@@ -78,7 +78,7 @@ def filtro(c):
         return 4
 
 # Función principal: implementa el análisis léxico
-def scanner():
+def obten_token():
     """Implementa un analizador léxico: lee los caracteres de la entrada estándar"""
     edo = 0 # número de estado en el autómata
     lexema = "" # palabra que genera el token
@@ -124,4 +124,4 @@ def scanner():
         if edo == END: return tokens
         lexema = ""
         edo = 0
-scanner()
+#scanner()
