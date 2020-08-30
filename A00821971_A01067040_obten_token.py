@@ -20,27 +20,29 @@ REL = 106  # Operador relacional
 CON = 107  # Operador condicional
 IDT = 108  # Identificador
 END = 109  # Fin de la entrada
+CRI = 110  # Corchete izquierdo
+CRD = 111  # Corchete derecho
 ERR = 200  # Error léxico: palabra desconocida
 
 # Matriz de transiciones: codificación del AFD
 # [renglón, columna] = [estado no final, transición]
 # Estados > 99 son finales (ACEPTORES)
 # Caso especial: Estado 200 = ERROR
-#      dig   op   (    )  raro  esp    .    $    =    <>   !   ?    :   id
-MT = [[  1, OPB, LRP, RRP,   4,   0,   4, END,   5,   7,   9, CON, CON, 12], # edo 0 - estado inicial
-      [  1, INT, INT, INT, INT, INT,   2, INT, INT, INT, INT, INT, INT, INT], # edo 1 - dígitos enteros
-      [  3, ERR, ERR, ERR,   4, ERR,   4, ERR, ERR, ERR, ERR, ERR, ERR, ERR], # edo 2 - primer decimal flotante
-      [  3, FLT, FLT, FLT, FLT, FLT,   4, FLT, FLT, FLT, FLT, FLT, FLT, FLT], # edo 3 - decimales restantes flotante
-      [ERR, ERR, ERR, ERR,   4, ERR,   4, ERR, ERR, ERR, ERR, ERR, ERR, ERR], # edo 4 - estado de error
-      [ASG, ASG, ASG, ASG,   4, ASG,   4, ASG,   6, ASG, ASG, ASG, ASG, ASG], # edo 5 - operador de asignación =
-      [REL, REL, REL, REL,   4, REL,   4, REL, REL, REL, REL, REL, REL, REL], # edo 6 - operador relacional ==
-      [REL, REL, REL, REL,   4, REL,   4, REL,   8, REL, REL, REL, REL, REL], # edo 7 - operador relacional <, >
-      [REL, REL, REL, REL,   4, REL,   4, REL, REL, REL, REL, REL, REL, REL], # edo 8 - operador relacional >=, <=, !=
-      [ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR,   8, ERR, ERR, ERR, ERR, ERR], # edo 9 - operador no relacional !
-      [CON, CON, CON, CON, ERR, CON, ERR, CON, CON, CON, CON, CON, CON, CON], # edo 10 - operador condicional ?
-      [CON, CON, CON, CON, ERR, CON, ERR, CON, CON, CON, CON, CON, CON, CON], # edo 11 - operador condicional :
-      [IDT, IDT, IDT, IDT, ERR, IDT, ERR, IDT, IDT, IDT, IDT, IDT, IDT,  12]  # edo 12 - identificador a-z
-      ] 
+#      dig   op   (    )  raro  esp    .    $    =    <>   !   ?    :   id    {    }
+MT = [[  1, OPB, LRP, RRP,   4,   0,   4, END,   5,   7,   9, CON, CON, 12,  CRI, CRD], # edo 0 - estado inicial
+      [  1, INT, INT, INT, INT, INT,   2, INT, INT, INT, INT, INT, INT, INT, INT, INT], # edo 1 - dígitos enteros
+      [  3, ERR, ERR, ERR,   4, ERR,   4, ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR], # edo 2 - primer decimal flotante
+      [  3, FLT, FLT, FLT, FLT, FLT,   4, FLT, FLT, FLT, FLT, FLT, FLT, FLT, FLT, FLT], # edo 3 - decimales restantes flotante
+      [ERR, ERR, ERR, ERR,   4, ERR,   4, ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR], # edo 4 - estado de error
+      [ASG, ASG, ASG, ASG,   4, ASG,   4, ASG,   6, ASG, ASG, ASG, ASG, ASG, ASG, ASG], # edo 5 - operador de asignación =
+      [REL, REL, REL, REL,   4, REL,   4, REL, REL, REL, REL, REL, REL, REL, REL, REL], # edo 6 - operador relacional ==
+      [REL, REL, REL, REL,   4, REL,   4, REL,   8, REL, REL, REL, REL, REL, REL, REL], # edo 7 - operador relacional <, >
+      [REL, REL, REL, REL,   4, REL,   4, REL, REL, REL, REL, REL, REL, REL, REL, REL], # edo 8 - operador relacional >=, <=, !=
+      [ERR, ERR, ERR, ERR, ERR, ERR, ERR, ERR,   8, ERR, ERR, ERR, ERR, ERR, ERR, ERR], # edo 9 - operador no relacional !
+      [CON, CON, CON, CON, ERR, CON, ERR, CON, CON, CON, CON, CON, CON, CON, CON, CON], # edo 10 - operador condicional ?
+      [CON, CON, CON, CON, ERR, CON, ERR, CON, CON, CON, CON, CON, CON, CON, CON, CON], # edo 11 - operador condicional :
+      [IDT, IDT, IDT, IDT, ERR, IDT, ERR, IDT, IDT, IDT, IDT, IDT, IDT,  12, IDT, IDT]]  # edo 12 - identificador a-z
+      
 # Filtro de caracteres: regresa el número de columna de la matriz de transiciones
 # de acuerdo al caracter dado
 def filtro(c):
@@ -74,6 +76,10 @@ def filtro(c):
         return 12
     elif ord(c) >= 97 and ord(c) <= 122: # identificador a-z
         return 13
+    elif c == '{':
+        return 14
+    elif c == '}':
+        return 15
     else: # caracter raro
         return 4
 
@@ -117,6 +123,12 @@ def obten_token():
         elif edo == IDT: # ya se leyó el siguiente caracter
             leer = False
             print("Identificador",lexema)
+        elif edo == CRI:
+            lexema += c
+            print("Corchete", lexema)
+        elif edo == CRD:
+            lexema += c
+            print("Corchete", lexema)
         elif edo == ERR:   
             leer = False # el último caracter no es raro
             print("ERROR! palabra ilegal", lexema)

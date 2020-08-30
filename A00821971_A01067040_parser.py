@@ -21,7 +21,6 @@ Juan Jacobo Cruz Romero - A01067040
 
 """
 
-
 import sys
 import A00821971_A01067040_obten_token as scanner
 
@@ -32,7 +31,7 @@ global tokens
 def match(tokenEsperado):
     global token
     global tokens
-    #print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado) # Descomentar línea para debugear
+    print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado) # Descomentar línea para debugear
     if token == tokenEsperado:
         token = tokens.pop(0)
     else:
@@ -62,6 +61,11 @@ def exp():
         exp()
         match(scanner.RRP)
         exp1()
+    elif token == scanner.CRI:
+        match(token) # reconoce Delimitador {
+        exp()
+        exp1()
+        match(scanner.CRD)
     else:
         error("expresion mal iniciada")
 
