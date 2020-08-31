@@ -1,5 +1,6 @@
 #lang racket
-
+;Matrícula1: A00821971
+;Matrícula2: A01067040
 ; Problema 1: Función clima
 (define (clima temp)
   (cond
