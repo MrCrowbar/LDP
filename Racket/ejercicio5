@@ -1,6 +1,8 @@
 #lang racket
+
 ;Matrícula1: A00821971
 ;Matrícula2: A01067040
+
 ; Problema 1: Función clima
 (define (clima temp)
   (cond
@@ -36,7 +38,7 @@
     [(and (<= b a) (<= a c)) (sort b a c)]
     [(and (<= b c) (<= c a)) (sort b c a)]
     [(and (<= c a) (<= a b)) (sort c a b)]  
-    [else (sort c a b)]
+    [else (sort c b a)]
   )
 )
 
