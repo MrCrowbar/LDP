@@ -44,7 +44,7 @@ MT = [[  1, LRP, RRP,   4,   0,  END,    2,    3,    5,    2,     2], # edo 0 - 
       [SIM, SIM, SIM,   4, SIM,  SIM,    2,  SIM,  SIM,    2,     2], # edo 2 - Simbolo a-z
       [  3, ERR, ERR, ERR,   3,  ERR,    3,  STR,  ERR,    3,     3], # edo 3 - String
       [ERR, ERR, ERR, ERR, ERR,  ERR,  ERR,  ERR,  ERR,  ERR,   ERR], # edo 4 - ERROR
-      [ERR, ERR, ERR, ERR, ERR,  ERR,  ERR,  ERR,  ERR,  BOOL, BOOL]] # edo 5 - BOOL
+      [ERR, ERR, ERR, ERR, ERR,  ERR,  BOOL,  ERR,  ERR,  BOOL, BOOL]] # edo 5 - BOOL
 
 # Filtro de caracteres: regresa el número de columna de la matriz de transiciones
 # de acuerdo al caracter dado
@@ -110,4 +110,4 @@ def obten_token():
         lexema = ""
         edo = 0
 
-obten_token()
+#obten_token()
