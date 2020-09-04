@@ -25,13 +25,13 @@ def parser():
     tokens = scanner.obten_token() 
     #print("Tokens: ",tokens) # Descomentar línea para debugear
     if tokens == scanner.ERR:
-        error("LÉXICO")
+        error(">>ERROR LÉXICO<<")
     token = tokens.pop(0) # inicializa con el primer token
     prog()
     if token == scanner.END:
-        print("ENTRADA CORRECTA")
+        print(">>ENTRADA CORRECTA<<")
     else:
-        error("expresion mal terminada")
+        error(">>ERROR SINTÁCTICO<<")
 
 # Empata y obtiene el siguiente token
 def match(tokenEsperado):
@@ -39,7 +39,7 @@ def match(tokenEsperado):
     global tokens
     #print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado) # Descomentar línea para debugear
     if token == scanner.ERR:
-        error("LÉXICO")
+        error(">>ERROR LÉXICO<<")
     if token == tokenEsperado:
         token = tokens.pop(0)
     #else:
@@ -48,7 +48,7 @@ def match(tokenEsperado):
 
 # Termina con un mensaje de error
 def error(mensaje):
-    print("ERROR ", mensaje)
+    print(mensaje)
     sys.exit(1)
 
 """
@@ -79,7 +79,7 @@ def exp():
         lista()
         match(scanner.RRP)
     else:
-        error("LÉXICO")
+        error(">>ERROR SINTÁCTICO<<")
         
 
 def atomo():
