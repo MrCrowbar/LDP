@@ -112,4 +112,4 @@ def obten_token():
         lexema = ""
         edo = 0
 
-obten_token()
+#obten_token()

@@ -35,7 +35,7 @@ def parser():
     tokens = scanner.obten_token() 
     #print("Tokens: ",tokens) # Descomentar línea para debugear
     token = tokens.pop(0) # inicializa con el primer token
-    exp2()
+    prog()
     if token == scanner.END:
         print("Expresion bien construida!!")
     else:
@@ -82,7 +82,8 @@ def exp2():
 def error(mensaje):
     print("ERROR:", mensaje)
     sys.exit(1)
-#parser()
+
+parser()
 
 """
 Así quedaron las nuevas reglas de la gramática
@@ -99,16 +100,25 @@ def prog():
     prog()
 
 def exp():
-    atomo()
+    if atomo() or lista():
+        match(token)
+    else:
+        error("expresión mal compuesta")
 
 def atomo():
-    if token == scanner.SIM:
-        match(token)
+    return token == scanner.SIM or constante()
 
 def constante():
-    if token == scanner.NUM:
-        pass
+    return token == scanner.NUM or token == scanner.BOOL or token == scanner.STR:
 
-#def lista():
-#
-#def elementos():
+def lista():
+    if token == scanner.LRP:
+        match(token)
+        elementos()
+        return token == scanner.RRP
+    else return False
+
+def elementos():
+    if exp():
+        match(token)
+        elementos()
