@@ -88,7 +88,7 @@ def obten_token():
             if edo < 100 and edo != 0: lexema += c
         if edo == NUM:    
             leer = False # ya se leyó el siguiente caracter
-            print("Entero", lexema)
+            print("Número", lexema)
         elif edo == LRP:   
             lexema += c  # el último caracter forma el lexema
             print("Delimitador", lexema)
@@ -97,13 +97,13 @@ def obten_token():
             print("Delimitador", lexema)
         elif edo == SIM: # ya se leyó el siguiente caracter
             leer = False
-            print("Identificador",lexema)
+            print("Símbolo",lexema)
         elif edo == ERR:   
             leer = False # el último caracter no es raro
             print("ERROR! palabra ilegal", lexema)
         elif edo == BOOL:
             lexema += c
-            print("BOOL",lexema)
+            print("Booleano",lexema)
         elif edo == STR:
             lexema += c
             print("String",lexema)
