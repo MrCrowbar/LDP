@@ -23,11 +23,13 @@ def parser():
     global token # variable para almacenar el token 'i' de la lista tokens
     global tokens # variable para almacenar la lista de tokens del scanner
     tokens = scanner.obten_token() 
-    print("Tokens: ",tokens) # Descomentar línea para debugear
+    #print("Tokens: ",tokens) # Descomentar línea para debugear
+    if tokens == scanner.ERR:
+        error("LÉXICO")
     token = tokens.pop(0) # inicializa con el primer token
     prog()
     if token == scanner.END:
-        print("Expresion bien construida!!")
+        print("ENTRADA CORRECTA")
     else:
         error("expresion mal terminada")
 
@@ -36,15 +38,17 @@ def match(tokenEsperado):
     global token
     global tokens
     #print("TOKEN: ", token, ", TOKEN ESPERADO: ", tokenEsperado) # Descomentar línea para debugear
+    if token == scanner.ERR:
+        error("LÉXICO")
     if token == tokenEsperado:
         token = tokens.pop(0)
-    else:
-        error("token equivocado")
+    #else:
+     #   error("token equivocado")
 
 
 # Termina con un mensaje de error
 def error(mensaje):
-    print("ERROR:", mensaje)
+    print("ERROR ", mensaje)
     sys.exit(1)
 
 """
@@ -58,6 +62,7 @@ Así quedaron las nuevas reglas de la gramática
 """
 
 def prog():
+    print("<prog>")
     if token == scanner.END:
         return
     else:
@@ -66,7 +71,7 @@ def prog():
 
 
 def exp():
-    #if token == scanner.SIM or token == scanner.NUM or token == scanner.BOOL or token == scanner.STR:
+    print("<exp>")
     if atomo():
         match(token)
     elif token == scanner.LRP:
@@ -74,27 +79,30 @@ def exp():
         lista()
         match(scanner.RRP)
     else:
-        error("Error expresión mal construída")
+        error("LÉXICO")
         
 
 def atomo():
-    #if token == scanner.SIM or token == scanner.NUM or token == scanner.BOOL or token == scanner.STR:
     if token == scanner.SIM or constante():
+        print("<atomo>")
         return True
     return False
     
 
 def constante():
     if token == scanner.NUM or token == scanner.BOOL or token == scanner.STR:
+        print("<constante>")
         return True
     return False
 
 
 def lista():
+    print("<lista>")
     elementos()
 
 
 def elementos():
+    print("<elementos>")
     if token == scanner.RRP:
         return
     exp()

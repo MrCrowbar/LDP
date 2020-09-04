@@ -100,7 +100,8 @@ def obten_token():
             print("Símbolo",lexema)
         elif edo == ERR:   
             leer = False # el último caracter no es raro
-            print("ERROR! palabra ilegal", lexema)
+            #print("ERROR! palabra ilegal", lexema)
+            return ERR
         elif edo == BOOL:
             lexema += c
             print("Booleano",lexema)
