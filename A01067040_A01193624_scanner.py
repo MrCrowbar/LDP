@@ -1,3 +1,7 @@
+# Integrantes
+# Jacobo Cruz A01067040
+# Diego Frías Nerio A01193624
+
 """
 terminales: simbolo, numero, booleano, string
 noTerminales: <>

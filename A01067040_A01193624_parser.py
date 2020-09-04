@@ -8,11 +8,14 @@
 # son reconocidos por el scanner
 #
 # Autor: Dr. Santiago Conant, Agosto 2014 (modificado Agosto 2015)
+#
+# Integrantes
+# Jacobo Cruz A01067040
+# Diego Frías Nerio A01193624
 
 
 import sys
-#import A00821971_A01067040_obten_token as scanner
-import Tarea2_scanner as scanner
+import A01067040_A01193624_scanner as scanner
 
 global token
 global tokens
