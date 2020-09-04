@@ -104,12 +104,11 @@ def exp():
 def atomo():
     if token == scanner.SIM:
         match(token)
-    
 
 def constante():
     if token == scanner.NUM:
         pass
 
-def lista():
-
-def elementos():
+#def lista():
+#
+#def elementos():

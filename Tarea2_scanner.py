@@ -38,13 +38,13 @@ ERR = 200  # Error léxico: palabra desconocida
 # [renglón, columna] = [estado no final, transición]
 # Estados > 99 son finales (ACEPTORES)
 # Caso especial: Estado 200 = ERROR
-#      dig   (    )  raro  esp    $   letra   "     #     t      f
-MT = [[  1, LRP, RRP,   4,   0,  END,    2,    3,    5,    2,     2], # edo 0 - estado inicial
-      [  1, NUM, NUM,   4, NUM,  NUM,  NUM,  NUM,  NUM,  NUM,   NUM], # edo 1 - dígitos enteros
-      [SIM, SIM, SIM,   4, SIM,  SIM,    2,  SIM,  SIM,    2,     2], # edo 2 - Simbolo a-z
-      [  3, ERR, ERR, ERR,   3,  ERR,    3,  STR,  ERR,    3,     3], # edo 3 - String
-      [ERR, ERR, ERR, ERR, ERR,  ERR,  ERR,  ERR,  ERR,  ERR,   ERR], # edo 4 - ERROR
-      [ERR, ERR, ERR, ERR, ERR,  ERR,  BOOL,  ERR,  ERR,  BOOL, BOOL]] # edo 5 - BOOL
+#      dig   (    )  raro  esp    $   letra   "     #     t|f
+MT = [[  1, LRP, RRP,   4,   0,  END,    2,    3,    5,    2], # edo 0 - estado inicial
+      [  1, NUM, NUM,   4, NUM,  NUM,  NUM,  NUM,  NUM,  NUM], # edo 1 - dígitos enteros
+      [SIM, SIM, SIM,   4, SIM,  SIM,    2,  SIM,  SIM,    2], # edo 2 - Simbolo a-z
+      [  3, ERR, ERR, ERR,   3,  ERR,    3,  STR,  ERR,    3], # edo 3 - String
+      [ERR, ERR, ERR, ERR, ERR,  ERR,  ERR,  ERR,  ERR,  ERR], # edo 4 - ERROR
+      [ERR, ERR, ERR, ERR, ERR,  ERR,  ERR,  ERR,  ERR,  BOOL]] # edo 5 - BOOL
 
 # Filtro de caracteres: regresa el número de columna de la matriz de transiciones
 # de acuerdo al caracter dado
@@ -62,6 +62,8 @@ def filtro(c):
         return 4
     elif c == '$': # fin de entrada
         return 5
+    elif c == 't' or c == 'f': # true or false
+        return 9
     elif ord(c) >= 97 and ord(c) <= 122: # identificador a-z
         return 6
     elif c == '"': # caracter string "
@@ -110,4 +112,4 @@ def obten_token():
         lexema = ""
         edo = 0
 
-#obten_token()
+obten_token()
