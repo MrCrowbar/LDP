@@ -1,3 +1,7 @@
+% Daniel Castro A01089938
+% Jacobo Cruz - A01067040
+% Diego Frías Nerio - A01193624
+
 % PreProcess
 % change nodo() process with your machine name @machine
 % 1) Create node tienda 
